@@ -1,0 +1,56 @@
+version: "3"
+
+services:
+  web:
+    container_name: web
+    build: ./nginx
+    env_file:
+      - ./.env
+    network_mode: "host"
+    volumes:
+      - ./nginx/:/etc/nginx/conf.d/
+  db:
+    container_name: postgres-db
+    image: postgres:15.2
+    env_file:
+      - ./.env
+    network_mode: "host"
+    volumes:
+      - database-volume:/var/lib/postgresql/data
+  redis:
+    container_name: redis
+    image: redis:7
+    env_file:
+      - ./.env
+    network_mode: "host"
+  # code base
+  social-client:
+    container_name: social-client
+    build: ../social-client/
+    env_file:
+      - ./.env
+    network_mode: "host"
+    volumes:
+      - ../social-client/:/app
+    command: [ "npm", "run", "dev" ]
+  # social-server:
+  #   container_name: social-server
+  #   build: ../social-server/
+  #   env_file:
+  #     - ./.env
+  #   network_mode: "host"
+  #   volumes:
+  #     - ../social-server/:/app
+  #   command: [ "npm", "run", "dev" ]
+  # social-socket:
+  #   container_name: social-socket
+  #   build: ../social-socket/
+  #   env_file:
+  #     - ./.env
+  #   network_mode: "host"
+  #   volumes:
+  #     - ../social-socket/:/app
+  #   command: [ "npm", "run", "dev" ]
+
+volumes:
+  database-volume:
