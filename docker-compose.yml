@@ -33,24 +33,24 @@ services:
     volumes:
       - ../social-client/:/app
     command: [ "npm", "run", "dev" ]
-  # social-server:
-  #   container_name: social-server
-  #   build: ../social-server/
-  #   env_file:
-  #     - ./.env
-  #   network_mode: "host"
-  #   volumes:
-  #     - ../social-server/:/app
-  #   command: [ "npm", "run", "dev" ]
-  # social-socket:
-  #   container_name: social-socket
-  #   build: ../social-socket/
-  #   env_file:
-  #     - ./.env
-  #   network_mode: "host"
-  #   volumes:
-  #     - ../social-socket/:/app
-  #   command: [ "npm", "run", "dev" ]
+  social-server:
+    container_name: social-server
+    build: ../social-server/
+    env_file:
+      - ./.env
+    network_mode: "host"
+    volumes:
+      - ../social-server/:/app
+    command: [ "npm", "run", "dev" ]
+  social-socket:
+    container_name: social-socket
+    build: ../social-socket/
+    env_file:
+      - ./.env
+    network_mode: "host"
+    volumes:
+      - ../social-socket/:/app
+    command: [ "npm", "run", "dev" ]
 
 volumes:
   database-volume:
