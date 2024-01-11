@@ -8,7 +8,13 @@ services:
       - ./.env
     network_mode: "host"
     volumes:
-      - ./nginx/:/etc/nginx/conf.d/
+      - ./nginx/:/etc/nginx/conf.d/:ro
+      - ./certbot/www/:/var/www/certbot/:ro
+  certbot:
+    image: certbot/certbot:latest
+    volumes:
+      - ./certbot/www/:/var/www/certbot/:rw
+      - ./certbot/conf/:/etc/letsencrypt/:rw
   db:
     container_name: postgres-db
     image: postgres:15.2
