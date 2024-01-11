@@ -32,30 +32,30 @@ services:
   # code base
   social-client:
     container_name: social-client
-    build: ../social-client/
+    build: ../vboard-social-client/
     env_file:
       - ./.env
     network_mode: "host"
     volumes:
-      - ../social-client/:/app
+      - ../vboard-social-client/:/app
     command: [ "npm", "run", "dev" ]
   social-server:
     container_name: social-server
-    build: ../social-server/
+    build: ../vboard-social-server/
     env_file:
       - ./.env
     network_mode: "host"
     volumes:
-      - ../social-server/:/app
+      - ../vboard-social-server/:/app
     command: [ "npm", "run", "dev" ]
   social-socket:
     container_name: social-socket
-    build: ../social-socket/
+    build: ../vboard-social-socket/
     env_file:
       - ./.env
     network_mode: "host"
     volumes:
-      - ../social-socket/:/app
+      - ../vboard-social-socket/:/app
     command: [ "npm", "run", "dev" ]
 
 volumes:
