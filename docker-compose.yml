@@ -59,6 +59,12 @@ services:
     volumes:
       - ../vboard-social-socket/:/app
     command: [ "npm", "run", "dev" ]
+  social-media:
+    container_name: social-media
+    build: ../vboard-social-media/
+    env_file:
+      - ./.env
+    network_mode: "host"
 
 volumes:
   database-volume:
